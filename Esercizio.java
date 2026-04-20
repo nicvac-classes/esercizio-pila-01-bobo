@@ -1,26 +1,43 @@
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
+// LEGGERE LE ISTRUZIONI NEL FILE README.md
 
-//Import di Classi Java necessarie al funzionamento del programma
 import java.util.Scanner;
 
-// Classe principale, con metodo main
 class Esercizio {
-    // Il programma parte con una chiamata a main().
-    public static void main(String args[])
-    {
-        //Variabili del programma
-        String nome;
 
-        //Creo l'oggetto in per l'input da tastiera
-        Scanner in = new Scanner( System.in );
+    public static void main(String[] args) {
+        
+        Scanner in = new Scanner(System.in);
+        Pila<Character> pila = new Pila<>();
 
-        //Leggo l'input da tastiera
-        System.out.print("Inserisci il tuo nome: ");
-        nome = in.nextLine();
+        String parola;
 
-        //Output del nome acquisito da tastiera
-        System.out.println("Ciao "+nome+"!");
+        do {
+            System.out.print("Inserire una parola: ");
+            parola = in.nextLine();
+
+            if (!parola.equalsIgnoreCase("X")) {
+                
+                // Inseriamo i caratteri nella pila (dal primo all'ultimo)
+                for (int i = 0; i < parola.length(); ++i) {
+                    pila.push(parola.charAt(i));
+                }
+
+                // Costruiamo la stringa inversa estraendo dalla pila
+                String palindrom = "";
+                while (!pila.isEmpty()) {
+                    palindrom += pila.pop();
+                }
+
+                // Controlliamo se è un palindromo (ignorando maiuscole/minuscole)
+                if (parola.equalsIgnoreCase(palindrom)) {
+                    System.out.println("La parola: \"" + parola + "\" è palindroma!!");
+                } else {
+                    System.out.println("La parola: \"" + parola + "\" NON è palindroma.");
+                }
+            }
+
+        } while (!parola.equalsIgnoreCase("x"));
+
+        in.close();
     }
 }
-
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
